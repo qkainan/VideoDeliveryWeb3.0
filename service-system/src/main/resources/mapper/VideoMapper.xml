@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.feidian.mapper.VideoMapper">
+
+    <insert id="insertVideo">
+        INSERT INTO video (user_id, video_name, video_title, video_type, video_description,
+                           cover_url, data_url, video_status)
+        VALUES (#{userId}, #{videoName}, #{videoTitle}, #{videoType},
+                #{videoDescription}, #{coverUrl}, #{dataUrl}, #{videoStatus});
+    </insert>
+
+    <update id="updateVideoInfo">
+        UPDATE video
+        <set>
+            <if test="videoTitle!=null and videoTitle!=''">
+                video_title = #{videoTitle},
+            </if>
+            <if test="videoType!=null and videoType!=''">
+                video_type = #{videoType},
+            </if>
+            <if test="video_description!=null and video_description!=''">
+                video_description = #{videoDescription},
+            </if>
+        </set>
+        WHERE id = #{videoId};
+    </update>
+
+    <update id="deleteVideo">
+        UPDATE video
+        SET is_deleted = ${1}
+        WHERE id = #{videoId};
+    </update>
+
+
+
+    <select id="findByVideoId" resultType="com.feidian.po.VideoPO">
+        SELECT id,
+               user_id,
+               video_name,
+               video_title,
+               video_type,
+               video_description,
+               cover_url,
+               data_url,
+               video_status,
+               create_time,
+               update_time,
+               is_deleted
+        FROM video
+        WHERE id = #{id};
+    </select>
+
+    <select id="findByUserId" resultType="com.feidian.po.VideoPO">
+        SELECT id,
+               user_id,
+               video_name,
+               video_title,
+               video_type,
+               video_description,
+               cover_url,
+               data_url,
+               video_status,
+               create_time,
+               update_time,
+               is_deleted
+        FROM video
+        WHERE user_id = #{userId};
+    </select>
+
+</mapper>

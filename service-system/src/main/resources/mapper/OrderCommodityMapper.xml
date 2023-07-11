@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.feidian.mapper.OrderCommodityMapper">
+
+    <insert id="insertOrderCommodity">
+        INSERT INTO order_commodity (order_id, commodity_id, commodity_num)
+        VALUES (#{orderId}, #{commodityId}, #{commodityNum});
+    </insert>
+
+    <select id="findById" resultType="com.feidian.po.OrderCommodityPO">
+        SELECT id, order_id, commodity_id, commodity_num, create_time, update_time, is_deleted
+        FROM order_commodity
+        WHERE id = #{id};
+    </select>
+
+</mapper>

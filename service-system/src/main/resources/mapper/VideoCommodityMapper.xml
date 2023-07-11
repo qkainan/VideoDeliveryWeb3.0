@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.feidian.mapper.VideoCommodityMapper">
+
+    <insert id="insertVideoCommodity">
+        insert into video_commodity (user_id, video_id, commodity_id, video_status)
+            VALUES (#{userId}, #{videoId}, #{commodityId}, #{videoStatus});
+    </insert>
+
+    <update id="updateVideoCommodityInfo">
+        UPDATE video_commodity
+        SET commodity_id = #{commodityId}
+        WHERE video_id = #{videoId};
+    </update>
+
+    <select id="findByVideoId" resultType="com.feidian.po.VideoCommodityPO">
+        SELECT (id, user_id, video_id, commodity_id, video_status, create_time, update_time, is_deleted)
+        FROM video_commodity
+        WHERE video_id = #{videoId};
+    </select>
+
+</mapper>

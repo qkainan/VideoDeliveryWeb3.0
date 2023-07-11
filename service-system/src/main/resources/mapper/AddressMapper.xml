@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.feidian.mapper.AddressMapper">
+
+    <insert id="insertAddress" useGeneratedKeys="true" keyProperty="id">
+        INSERT INTO address
+        (user_id, address_name, address_status)
+        VALUES (#{userId}, #{addressName}, ${1});
+    </insert>
+
+
+    <update id="deleteAddress">
+        UPDATE address
+        SET is_deleted = ${0}
+        WHERE id = #{addressId};
+    </update>
+
+    <update id="updateAddressInfo">
+        UPDATE address
+        SET address_name = ${addressName}
+        WHERE id = #{id};
+    </update>
+
+    <select id="findByAddressId" resultType="com.feidian.po.AddressPO">
+        SELECT id, user_id, address_name, address_status, create_time, update_time, is_deleted
+        FROM address
+        WHERE id = #{addressId};
+    </select>
+
+</mapper>

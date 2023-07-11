@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.feidian.mapper.CartMapper">
+
+
+    <insert id="insertCart">
+        INSERT INTO cart
+        (user_id, commodity_id, address_id, commodity_num, order_status, is_deleted)
+        VALUES (#{userId}, #{commodityId}, #{addressId}, #{commodityNum}, #{orderStatus}, ${0});
+    </insert>
+
+    <select id="findByUserId" resultType="com.feidian.po.CartPO">
+        SELECT id,
+               user_id,
+               commodity_id,
+               address_id,
+               commodity_num,
+               order_status,
+               create_time,
+               update_time,
+               is_deleted
+        FROM cart
+        WHERE user_id = #{userId};
+    </select>
+
+
+    <update id="deleteCart">
+        UPDATE cart
+        SET is_deleted = ${1}
+        WHERE id = #{cartId};
+    </update>
+
+
+    <select id="findByCartId" resultType="com.feidian.po.CartPO">
+        SELECT id,
+               user_id,
+               commodity_id,
+               address_id,
+               commodity_num,
+               order_status,
+               create_time,
+               update_time,
+               is_deleted
+        FROM cart
+        WHERE id = #{id};
+    </select>
+
+    <update id="updateOrderStatus">
+        UPDATE cart
+        SET order_status = ${1}
+        WHERE id = #{id};
+    </update>
+
+</mapper>

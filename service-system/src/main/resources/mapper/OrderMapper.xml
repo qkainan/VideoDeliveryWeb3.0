@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.feidian.mapper.OrderMapper">
+
+    <insert id="insertOrder">
+        INSERT INTO `order` (buyer_id, seller_id, address_name, order_status)
+        VALUES (#{buyerId}, #{sellerId}, #{addressName}, #{orderStatus});
+    </insert>
+
+    <update id="updateOrderStatus">
+        UPDATE `order`
+        SET order_status = ${5}
+        WHERE id = #{id};
+    </update>
+
+    <select id="findByBuyerId" resultType="com.feidian.po.OrderPO">
+        SELECT id, buyer_id, seller_id, address_name, order_status, create_time, update_time, is_deleted
+        FROM `order`
+        WHERE buyer_id = #{buyerId};
+    </select>
+
+    <select id="findBySellerId" resultType="com.feidian.po.OrderPO">
+        SELECT id, buyer_id, seller_id, address_name, order_status, create_time, update_time, is_deleted
+        FROM `order`
+        WHERE seller_id = #{sellerId};
+    </select>
+
+</mapper>

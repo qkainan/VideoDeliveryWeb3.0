@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.feidian.mapper.UserMapper">
+
+
+    <insert id="insertUser" useGeneratedKeys="true" keyProperty="id">
+        INSERT INTO user (username, password, nickname, email_address, user_status)
+        VALUES (#{username}, #{password}, #{nickname}, #{emailAddress}, ${1})
+    </insert>
+
+    <select id="findByName" resultType="com.feidian.po.UserPO">
+        SELECT id, username, password
+        FROM user
+        WHERE username = #{username};
+    </select>
+
+    <select id="findById" resultType="com.feidian.po.UserPO">
+        SELECT id,
+               username,
+               password,
+               nickname,
+               phone,
+               head_url,
+               user_description,
+               email_address,
+               user_status,
+               create_time,
+               update_time,
+               is_deleted
+        FROM user
+        WHERE id = #{id};
+    </select>
+
+    <update id="updateUserInfo">
+        UPDATE user
+        <set>
+            <if test="headUrl!=null and headUrl!=''">
+                head_url = #{headUrl},
+            </if>
+            <if test="userDescription!=null and userDescription!=''">
+                user_description = #{userDescription},
+            </if>
+        </set>
+        WHERE id = #{id};
+    </update>
+
+</mapper>

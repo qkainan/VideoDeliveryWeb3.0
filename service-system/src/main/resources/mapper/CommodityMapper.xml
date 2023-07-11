@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.feidian.mapper.CommodityMapper">
+
+    <insert id="insertCommodity" parameterType="com.feidian.po.CommodityPO">
+        INSERT INTO commodity(id, user_id, commodity_name, commodity_type, price, commodity_address,
+                              commodity_description, cover_url)
+        VALUES (#{id}, #{userId}, #{commodityName}, #{commodityType}, #{price}, #{commodityAddress},
+                #{commodityDescription}, #{coverUrl});
+    </insert>
+
+    <select id="findByCommodityId" resultType="com.feidian.po.CommodityPO">
+        SELECT id,
+               user_id,
+               commodity_name,
+               commodity_type,
+               price,
+               commodity_description,
+               commodity_address,
+               cover_url,
+               commodity_status,
+               create_time,
+               update_time,
+               is_deleted
+        FROM commodity
+        WHERE id = #{commodityId}
+    </select>
+
+    <select id="findByUserId" resultType="com.feidian.po.CommodityPO">
+        SELECT id,
+               user_id,
+               commodity_name,
+               commodity_type,
+               price,
+               commodity_description,
+               commodity_address,
+               cover_url,
+               commodity_status,
+               create_time,
+               update_time,
+               is_deleted
+        FROM commodity
+        WHERE user_id = #{userId}
+    </select>
+
+    <update id="deleteCommodity">
+        UPDATE commodity
+        SET is_deleted = ${1}
+        WHERE id = #{id}
+    </update>
+
+    <update id="updateCommodity">
+        UPDATE commodity
+        <set>
+            <if test="commodityName!=null and commodityName!=''">
+                commodity_name = #{commodityName},
+            </if>
+            <if test="commodityType!=null and commodityType!=''">
+                commodity_type = #{commodityType},
+            </if>
+            <if test="price!=null and price!=''">
+                price = #{price},
+            </if>
+            <if test="commodityAddress!=null and commodityAddress!=''">
+                commodity_address = #{commodityAddress},
+            </if>
+            <if test="commodityDescription!=null and commodityDescription!=''">
+                commodity_description = #{commodityDescription},
+            </if>
+        </set>
+        WHERE id = #{commodityId};
+    </update>
+
+</mapper>
