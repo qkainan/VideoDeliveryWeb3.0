@@ -1,0 +1,5 @@
+# Project exclude paths
+/common/common-util/target/
+/common/security/target/
+/model/target/
+/service-system/target/
