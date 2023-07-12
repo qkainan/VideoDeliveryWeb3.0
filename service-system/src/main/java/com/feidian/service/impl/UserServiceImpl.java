@@ -7,9 +7,11 @@ import com.feidian.dto.UserDTO;
 import com.feidian.mapper.*;
 import com.feidian.po.*;
 import com.feidian.responseResult.ResponseResult;
+import com.feidian.service.UserService;
 import com.feidian.util.AESUtil;
 import com.feidian.util.JwtUtil;
 import com.feidian.util.ReceivingFileUtil;
+import com.feidian.util.SecurityContextUtils;
 import com.feidian.vo.UserHomepageVO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.RedisTemplate;
@@ -177,7 +179,7 @@ public class UserServiceImpl implements UserService {
     @Override
     public ResponseResult updateUserHead(MultipartFile headFile) {
         UserBO userBO = new UserBO();
-        userBO.setId(JwtUtil.getUserId());
+        userBO.setId(SecurityContextUtils.getUserId());
 
         //接收头像图片
         String headUrl = "";
@@ -195,7 +197,7 @@ public class UserServiceImpl implements UserService {
     @Transactional
     @Override
     public ResponseResult updateUserDescription(UserDTO userDTO) {
-        userDTO.setId(JwtUtil.getUserId());
+        userDTO.setId(SecurityContextUtils.getUserId());
         UserBO userBO = new UserBO(userDTO.getId(),userDTO.getUserDescription());
         userMapper.updateUserInfo(userBO);
         return ResponseResult.successResult(200,"更新个性签名成功");
@@ -203,7 +205,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public ResponseResult viewUserHomepage() {
-        Long userId = JwtUtil.getUserId();
+        Long userId = SecurityContextUtils.getUserId();
 
         UserPO userPO = userMapper.findById(userId);
 

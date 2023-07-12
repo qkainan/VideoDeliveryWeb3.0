@@ -14,6 +14,7 @@ import com.feidian.responseResult.ResponseResult;
 import com.feidian.service.VideoService;
 import com.feidian.util.JwtUtil;
 import com.feidian.util.ReceivingFileUtil;
+import com.feidian.util.SecurityContextUtils;
 import com.feidian.util.UploadingFileUtil;
 import com.feidian.vo.DisplayVideoVO;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -44,7 +45,7 @@ public class VideoServiceImpl implements VideoService {
     @Transactional
     @Override
     public ResponseResult receivingVideo(VideoDTO receivingVideoDTO, MultipartFile dataFile, MultipartFile coverFile) {
-        Long userId = JwtUtil.getUserId();
+        Long userId = SecurityContextUtils.getUserId();
 
         String videoDataUrl = "";
         String videoCoverUrl = "";
@@ -119,7 +120,7 @@ public class VideoServiceImpl implements VideoService {
 
     @Override
     public ResponseResult viewPerVideos() {
-        Long userId = JwtUtil.getUserId();
+        Long userId = SecurityContextUtils.getUserId();
         List<VideoPO> videoPOList = videoMapper.findByUserId(userId);
 
         return ResponseResult.successResult(videoPOList);

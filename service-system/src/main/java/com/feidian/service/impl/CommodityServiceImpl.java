@@ -10,6 +10,7 @@ import com.feidian.responseResult.ResponseResult;
 import com.feidian.service.CommodityService;
 import com.feidian.util.JwtUtil;
 import com.feidian.util.ReceivingFileUtil;
+import com.feidian.util.SecurityContextUtils;
 import com.feidian.util.UploadingFileUtil;
 import com.feidian.vo.DisplayCommodityVO;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -34,7 +35,7 @@ public class CommodityServiceImpl implements CommodityService {
     @Transactional
     @Override
     public ResponseResult uploadCommodity(CommodityDTO commodityDTO, MultipartFile coverFile, MultipartFile[] imageFile) {
-        Long userId = JwtUtil.getUserId();
+        Long userId = SecurityContextUtils.getUserId();
 
         String commodityCoverUrl = "";
         String uploadCommodityCoverDir = "D:/uploads/commodities/cover/";
@@ -57,7 +58,7 @@ public class CommodityServiceImpl implements CommodityService {
                 MultipartFile multipartFile : imageFile) {
             ReceivingFileUtil.saveFile(multipartFile, uploadCommodityImageDir);
             commodityImageUrl = ReceivingFileUtil.saveFile(multipartFile, uploadCommodityImageDir);
-            commodityImageMapper.insertCommodityImage(commodityBO.getId(), commodityImageUrl, 1);
+            commodityImageMapper.insertCommodityImage(commodityBO.getId(), commodityImageUrl, 1L);
         }
 
         commodityMapper.insertCommodity(commodityBO);
@@ -103,7 +104,7 @@ public class CommodityServiceImpl implements CommodityService {
 
     @Override
     public ResponseResult updateCommodityInfo(CommodityDTO commodityDTO) {
-        CommodityBO commodityBO = new CommodityBO(commodityDTO.getCommodityId(), JwtUtil.getUserId(),
+        CommodityBO commodityBO = new CommodityBO(commodityDTO.getCommodityId(), SecurityContextUtils.getUserId(),
                 commodityDTO.getCommodityName(), commodityDTO.getCommodityType(),
                 commodityDTO.getPrice(), commodityDTO.getCommodityDescription(),
                 commodityDTO.getCommodityAddress(), commodityDTO.getCoverUrl());
@@ -120,7 +121,7 @@ public class CommodityServiceImpl implements CommodityService {
 
     @Override
     public ResponseResult viewPerCommodities() {
-        Long userId = JwtUtil.getUserId();
+        Long userId = SecurityContextUtils.getUserId();
         List<CommodityPO> commodityPOList = commodityMapper.findByUserId(userId);
         return ResponseResult.successResult(commodityPOList);
     }

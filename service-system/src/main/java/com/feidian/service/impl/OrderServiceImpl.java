@@ -10,6 +10,7 @@ import com.feidian.po.OrderPO;
 import com.feidian.responseResult.ResponseResult;
 import com.feidian.service.OrderService;
 import com.feidian.util.JwtUtil;
+import com.feidian.util.SecurityContextUtils;
 import com.feidian.vo.PurchaseOrderVO;
 import com.feidian.vo.SaleOrderVO;
 import org.apache.ibatis.annotations.Mapper;
@@ -45,7 +46,7 @@ public class OrderServiceImpl implements OrderService {
     public ResponseResult viewPurchaseOrder() {
         List<PurchaseOrderVO> purchaseOrderVoList = new ArrayList<>();
 
-        for (OrderPO o : orderMapper.findByBuyerId(JwtUtil.getUserId())) {
+        for (OrderPO o : orderMapper.findByBuyerId(SecurityContextUtils.getUserId())) {
 
             OrderCommodityPO orderCommodity = orderCommodityMapper.findById(o.getId());
             CommodityPO commodityPO = commodityMapper.findByCommodityId(orderCommodity.getCommodityId());
@@ -64,7 +65,7 @@ public class OrderServiceImpl implements OrderService {
     public ResponseResult viewSaleOrder() {
         List<SaleOrderVO> saleOrderVoList = new ArrayList<>();
 
-        for (OrderPO o : orderMapper.findBySellerId(JwtUtil.getUserId())) {
+        for (OrderPO o : orderMapper.findBySellerId(SecurityContextUtils.getUserId())) {
 
             OrderCommodityPO orderCommodity = orderCommodityMapper.findById(o.getId());
             CommodityPO commodityPO = commodityMapper.findByCommodityId(orderCommodity.getCommodityId());

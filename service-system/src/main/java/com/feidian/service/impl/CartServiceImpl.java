@@ -11,6 +11,7 @@ import com.feidian.po.CommodityPO;
 import com.feidian.responseResult.ResponseResult;
 import com.feidian.service.CartService;
 import com.feidian.util.JwtUtil;
+import com.feidian.util.SecurityContextUtils;
 import com.feidian.vo.CartVO;
 import org.apache.ibatis.annotations.Mapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -40,11 +41,11 @@ public class CartServiceImpl implements CartService {
     @Override
     public ResponseResult uploadCart(CartDTO cartDTO) {
         CommodityPO commodityPO = commodityMapper.findByCommodityId(cartDTO.getCommodityId());
-        Long orderStatus = 0;
+        Long orderStatus = 0L;
 
         BigDecimal totalPrice = commodityPO.getPrice().multiply(cartDTO.getCommodityNum());
 
-        CartBO cartBO = new CartBO(0,cartDTO.getUserId(), cartDTO.getCommodityId(),
+        CartBO cartBO = new CartBO(0L,cartDTO.getUserId(), cartDTO.getCommodityId(),
                 cartDTO.getAddressId(), commodityPO.getCommodityDescription(),
                 commodityPO.getPrice(), cartDTO.getCommodityNum(), totalPrice,
                 orderStatus);
@@ -57,7 +58,8 @@ public class CartServiceImpl implements CartService {
     @Transactional
     @Override
     public ResponseResult displayCartVOList() {
-        List<CartPO> list = cartMapper.findByUserId(JwtUtil.getUserId());
+
+        List<CartPO> list = cartMapper.findByUserId(SecurityContextUtils.getUserId());
         List<CartVO> cartVOList = new ArrayList<>();
 
 
@@ -84,7 +86,7 @@ public class CartServiceImpl implements CartService {
 
     @Override
     public ResponseResult cartPurchase(PurchaseDTO purchaseDTO) {
-        Long userId = JwtUtil.getUserId();
+        Long userId = SecurityContextUtils.getUserId();
 
         if (purchaseDTO.getId() != 0) {
             CartPO cartPO = cartMapper.findByCartId(purchaseDTO.getId());
@@ -94,7 +96,7 @@ public class CartServiceImpl implements CartService {
         }
 
         //状态（5：已收货 4：代发货 3：已发货 1：待发货 0：已退款 ）
-        Long orderStatus = 1;
+        Long orderStatus = 1L;
         CommodityPO commodityPO = commodityMapper.findByCommodityId(purchaseDTO.getCommodityId());
         AddressPO address = addressMapper.findByAddressId(purchaseDTO.getAddressId());
 

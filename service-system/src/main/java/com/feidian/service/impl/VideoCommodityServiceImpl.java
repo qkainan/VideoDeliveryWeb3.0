@@ -8,6 +8,7 @@ import com.feidian.po.VideoPO;
 import com.feidian.responseResult.ResponseResult;
 import com.feidian.service.VideoCommodityService;
 import com.feidian.util.JwtUtil;
+import com.feidian.util.SecurityContextUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -22,7 +23,7 @@ public class VideoCommodityServiceImpl implements VideoCommodityService {
 
     @Override
     public ResponseResult uploadVideoCommodity(VideoDTO videoDTO) {
-        Long userId = JwtUtil.getUserId();
+        Long userId = SecurityContextUtils.getUserId();
         VideoPO videoPO = videoMapper.findByVideoId(videoDTO.getVideoId());
 
         //将商品安排到video推荐商品里
