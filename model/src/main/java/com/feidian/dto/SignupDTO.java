@@ -18,6 +18,6 @@ public class SignupDTO {
 
 
     private String verifyCode;
-    private String emailAddress;
+    private String email;
 
 }

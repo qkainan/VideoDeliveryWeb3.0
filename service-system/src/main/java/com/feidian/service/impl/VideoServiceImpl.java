@@ -88,7 +88,7 @@ public class VideoServiceImpl implements VideoService {
         }
 
         DisplayVideoVO displayVideoVo = new DisplayVideoVO(videoPO.getId(), videoPO.getVideoTitle(), user.getId(),
-                user.getUserName(), videoPO.getDataUrl(), videoPO.getCoverUrl(),
+                user.getUsername(), videoPO.getDataUrl(), videoPO.getCoverUrl(),
                 videoPO.getVideoDescription(), videoPO.getCreateTime(), commodityPOList,
                 UploadingFileUtil.getFileVideo(videoPO.getDataUrl()).getFileByte(),
                 UploadingFileUtil.getFileImage(videoPO.getCoverUrl()).getFileByte());

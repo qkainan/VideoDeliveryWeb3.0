@@ -52,7 +52,7 @@ public class LoginUser implements UserDetails {
 
     @Override
     public String getUsername() {
-        return user.getUserName();
+        return user.getUsername();
     }
 
     //账号是否过期，true指没有过期

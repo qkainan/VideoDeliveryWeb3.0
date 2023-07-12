@@ -65,7 +65,7 @@ public class AuthenticationServiceImpl implements AuthenticationService {
         //把完整的与用户信息存入redis，userid作为key
         redisCache.setCacheObject("login:" + userId , loginUser);
 
-        return ResponseResult.successResult(200,"登陆成功");
+        return ResponseResult.successResult(map);
     }
 
     @Override
@@ -104,8 +104,7 @@ public class AuthenticationServiceImpl implements AuthenticationService {
         String encryptUserPwd = null;
 
         encryptUserPwd = bCryptPasswordEncoder.encode(signupDTO.getPassword());
-        UserBO userBO = new UserBO(signupDTO.getUsername(), encryptUserPwd,
-                signupDTO.getNickname(), signupDTO.getEmailAddress());
+        UserBO userBO = new UserBO(signupDTO.getUsername(), encryptUserPwd, signupDTO.getNickname());
         userMapper.insertUser(userBO);
         return ResponseResult.successResult(200, "快速注册成功");
     }
@@ -135,7 +134,7 @@ public class AuthenticationServiceImpl implements AuthenticationService {
 
         String regexEmailAddress = "\\w+@[\\w&&[^_]]{2,7}(\\.[a-zA-Z]{2,4}){1,3}";
 
-        if (!signupDTO.getEmailAddress().matches(regexEmailAddress)) {
+        if (!signupDTO.getEmail().matches(regexEmailAddress)) {
             return ResponseResult.errorResult(403,"邮箱格式不正确");
         }
 
@@ -148,7 +147,7 @@ public class AuthenticationServiceImpl implements AuthenticationService {
 
         String encryptUserPwd = bCryptPasswordEncoder.encode(signupDTO.getPassword());
         UserBO userBO = new UserBO(signupDTO.getUsername(), encryptUserPwd,
-                signupDTO.getNickname(), signupDTO.getEmailAddress());
+                signupDTO.getNickname(), signupDTO.getEmail());
         userMapper.insertUser(userBO);
         return ResponseResult.successResult(200, "邮箱注册成功");
     }

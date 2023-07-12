@@ -14,8 +14,8 @@ public class SysUser {
 
   @TableId
   private Long id;
-  private String userName;
-  private String nickName;
+  private String username;
+  private String nickname;
   private String password;
 
   private String status;
@@ -29,7 +29,7 @@ public class SysUser {
   private java.sql.Timestamp createTime;
   private Long updateBy;
   private java.sql.Timestamp updateTime;
-  private Long delFlag;
+  private Long isDelete;
 
 
 }

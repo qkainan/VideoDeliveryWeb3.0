@@ -4,8 +4,8 @@
 
 
     <insert id="insertUser" useGeneratedKeys="true" keyProperty="id">
-        INSERT INTO sys_user (username, password, nickname, email_address, user_status)
-        VALUES (#{username}, #{password}, #{nickname}, #{emailAddress}, ${1})
+        INSERT INTO sys_user (username, password, nickname, email, status)
+        VALUES (#{username}, #{password}, #{nickname}, #{email}, ${0})
     </insert>
 
 

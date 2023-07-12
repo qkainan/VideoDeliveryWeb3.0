@@ -24,7 +24,7 @@ public class AuthenticationController {
     //发送验证码
     @PostMapping("/sendVerifyCode")
     public ResponseResult sendVerifyCode(@RequestBody SignupDTO signupDTO) {
-        return utilService.sendVerifyCode(signupDTO.getEmailAddress(), signupDTO.getUsername());
+        return utilService.sendVerifyCode(signupDTO.getEmail(), signupDTO.getUsername());
     }
 
     @PostMapping("/user/login")

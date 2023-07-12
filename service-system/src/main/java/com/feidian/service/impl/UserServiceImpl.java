@@ -76,7 +76,7 @@ public class UserServiceImpl implements UserService {
         List<OrderPO> sellerOrderVoList = orderMapper.findBySellerId(userId);
         List<CartPO> cartList = cartMapper.findByUserId(userId);
 
-        UserHomepageVO userHomepageVo = new UserHomepageVO(userId, user.getUserName(),
+        UserHomepageVO userHomepageVo = new UserHomepageVO(userId, user.getUsername(),
                 user.getPhonenumber(), user.getAvatar(), user.getEmail(),
                 videoPOList, commodityPOList, buyerOrderVoList, sellerOrderVoList, cartList);
         return ResponseResult.successResult(userHomepageVo);
