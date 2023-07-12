@@ -68,7 +68,7 @@ public class VideoServiceImpl implements VideoService {
 
         VideoBO videoBO = new VideoBO(receivingVideoDTO.getUserId(), receivingVideoDTO.getVideoName(),
                 receivingVideoDTO.getVideoTitle(), receivingVideoDTO.getVideoType(), receivingVideoDTO.getVideoDescription(),
-                receivingVideoDTO.getCoverUrl(), receivingVideoDTO.getDataUrl(),1);
+                receivingVideoDTO.getCoverUrl(), receivingVideoDTO.getDataUrl(),1L);
 
         videoMapper.insertVideo(videoBO);
 

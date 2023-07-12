@@ -161,7 +161,7 @@ public class UserServiceImpl implements UserService {
         }
 
         if (!decryptUserPwd.equals(userPwd)) {
-            userPO.setUserStatus(1);
+            userPO.setUserStatus(1L);
             return ResponseResult.errorResult(403,"密码不正确");
         }
 
@@ -170,7 +170,7 @@ public class UserServiceImpl implements UserService {
         map = new HashMap<>();
         String token = JwtUtil.createJWT(UUID.randomUUID().toString(), String.valueOf(id01), null);
         map.put("Authorization", token);
-        userPO.setUserStatus(0);
+        userPO.setUserStatus(0L);
 
         return ResponseResult.successResult(map);
     }
