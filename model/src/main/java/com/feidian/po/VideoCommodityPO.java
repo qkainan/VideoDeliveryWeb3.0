@@ -15,15 +15,15 @@ import org.springframework.stereotype.Component;
 public class VideoCommodityPO {
 
   @TableId
-  private long id;
-  private long userId;
-  private long videoId;
-  private long commodityId;
-  private long videoStatus;
+  private Long id;
+  private Long userId;
+  private Long videoId;
+  private Long commodityId;
+  private Long videoStatus;
 
   private java.sql.Timestamp createTime;
   private java.sql.Timestamp updateTime;
-  private long isDeleted;
+  private Long isDeleted;
 
 
 

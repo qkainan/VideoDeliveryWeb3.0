@@ -17,17 +17,17 @@ import java.math.BigDecimal;
 public class CartPO {
 
   @TableId
-  private long id;
-  private long userId;
-  private long commodityId;
-  private long addressId;
+  private Long id;
+  private Long userId;
+  private Long commodityId;
+  private Long addressId;
   private BigDecimal commodityNum;
 
-  private long orderStatus;
+  private Long orderStatus;
 
   private java.sql.Timestamp createTime;
   private java.sql.Timestamp updateTime;
-  private long isDeleted;
+  private Long isDeleted;
 
 
 

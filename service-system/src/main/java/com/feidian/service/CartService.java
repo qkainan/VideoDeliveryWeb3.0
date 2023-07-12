@@ -9,7 +9,7 @@ public interface CartService {
 
     ResponseResult uploadCart(CartDTO cartDTO);
 
-    ResponseResult deleteCart(long cartId);
+    ResponseResult deleteCart(Long cartId);
 
     ResponseResult cartPurchase(PurchaseDTO purchaseDTO);
 }

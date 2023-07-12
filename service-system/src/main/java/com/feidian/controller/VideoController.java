@@ -33,7 +33,7 @@ public class VideoController {
 
     //展示视频
     @GetMapping("/displayVideo")
-    public ResponseResult displayVideo(long id) throws IOException, URISyntaxException {
+    public ResponseResult displayVideo(Long id) throws IOException, URISyntaxException {
        return videoService.displayVideo(id);
     }
 
@@ -49,7 +49,7 @@ public class VideoController {
     }
 
     @PostMapping ("/deleteVideo")
-    public ResponseResult deleteVideo(long videoId){
+    public ResponseResult deleteVideo(Long videoId){
         return videoService.deleteVideo(videoId);
     }
 
@@ -67,7 +67,7 @@ public class VideoController {
 
     //在更新视频信息之前，将已有的信息带上，避免更新部分信息覆盖之前的信息的情况
     @GetMapping("/beforeUpdateVideoInfo")
-    public ResponseResult beforeUpdateVideoInfo(long videoId){
+    public ResponseResult beforeUpdateVideoInfo(Long videoId){
         return videoService.beforeUpdateVideoInfo(videoId);
     }
 
@@ -77,7 +77,7 @@ public class VideoController {
 //
 //        HashMap<Long,byte[]> map = new HashMap<>();
 //
-//        for (long videoId:videoService.homeRecommend()) {
+//        for (Long videoId:videoService.homeRecommend()) {
 //            VideoPO videoPO = videoService.findByVideoId(videoId);
 //            list.add(videoPO);
 //            CoverVo coverVo = new CoverVo();

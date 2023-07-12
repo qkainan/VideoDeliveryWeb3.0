@@ -12,9 +12,9 @@ import java.util.List;
 public interface OrderMapper {
     void insertOrder(OrderBO orderBO);
 
-    void updateOrderStatus(long orderId);
+    void updateOrderStatus(Long orderId);
 
-    List<OrderPO> findByBuyerId(long userId);
+    List<OrderPO> findByBuyerId(Long userId);
 
-    List<OrderPO> findBySellerId(long userId);
+    List<OrderPO> findBySellerId(Long userId);
 }

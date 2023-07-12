@@ -15,8 +15,8 @@ import java.util.List;
 @AllArgsConstructor
 public class DisplayCommodityVO {
 
-  private long id;
-  private long userId;
+  private Long id;
+  private Long userId;
 
   private String commodityName;
   private String commodityType;
@@ -25,17 +25,17 @@ public class DisplayCommodityVO {
   private String commodityAddress;
   private String coverUrl;
 
-  private long commodityStatus;
+  private Long commodityStatus;
 
   private byte[] coverResource;
   private List<byte[]> imageResource;
 
   private java.sql.Timestamp createTime;
   private java.sql.Timestamp updateTime;
-  private long isDeleted;
+  private Long isDeleted;
 
 
-  public DisplayCommodityVO(long id, long userId, String commodityName, String commodityType, BigDecimal price, String commodityDescription, String commodityAddress, String coverUrl) {
+  public DisplayCommodityVO(Long id, Long userId, String commodityName, String commodityType, BigDecimal price, String commodityDescription, String commodityAddress, String coverUrl) {
     this.id = id;
     this.userId = userId;
     this.commodityName = commodityName;
@@ -48,7 +48,7 @@ public class DisplayCommodityVO {
 
 
 
-  public DisplayCommodityVO(long id, long userId, String commodityName, String commodityType, BigDecimal price, String commodityDescription, String commodityAddress, long commodityStatus, byte[] coverResource, List<byte[]> imageResource) {
+  public DisplayCommodityVO(Long id, Long userId, String commodityName, String commodityType, BigDecimal price, String commodityDescription, String commodityAddress, Long commodityStatus, byte[] coverResource, List<byte[]> imageResource) {
     this.id = id;
     this.userId = userId;
     this.commodityName = commodityName;

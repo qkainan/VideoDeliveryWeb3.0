@@ -14,11 +14,11 @@ public interface CartMapper {
 
     void insertCart(CartBO cartBO);
 
-    List<CartPO> findByUserId(long userId);
+    List<CartPO> findByUserId(Long userId);
 
-    void deleteCart(long cartId);
+    void deleteCart(Long cartId);
 
-    CartPO findByCartId(long id);
+    CartPO findByCartId(Long id);
 
-    void updateOrderStatus(long id);
+    void updateOrderStatus(Long id);
 }

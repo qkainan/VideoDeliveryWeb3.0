@@ -10,9 +10,9 @@ import org.springframework.stereotype.Repository;
 public interface AddressMapper {
     void insertAddress(AddressBO addressBO);
 
-    void deleteAddress(long addressId);
+    void deleteAddress(Long addressId);
 
     void updateAddressInfo(AddressBO addressBO);
 
-    AddressPO findByAddressId(long addressId);
+    AddressPO findByAddressId(Long addressId);
 }

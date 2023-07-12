@@ -15,15 +15,15 @@ import org.springframework.stereotype.Component;
 public class CommodityImagePO {
 
   @TableId
-  private long id;
-  private long commodityId;
+  private Long id;
+  private Long commodityId;
 
   private String imageUrl;
-  private long imageStatus;
+  private Long imageStatus;
 
   private java.sql.Timestamp createTime;
   private java.sql.Timestamp updateTime;
-  private long isDeleted;
+  private Long isDeleted;
 
 
 

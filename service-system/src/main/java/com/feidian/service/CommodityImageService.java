@@ -6,7 +6,7 @@ import java.util.List;
 
 public interface CommodityImageService {
 
-    void insertCommodityImage(long commodityId, String imageUrl, long imageStatus);
+    void insertCommodityImage(Long commodityId, String imageUrl, Long imageStatus);
 
-    List<CommodityImagePO> findByCommodityId(long CommodityId);
+    List<CommodityImagePO> findByCommodityId(Long CommodityId);
 }

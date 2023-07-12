@@ -15,19 +15,19 @@ import org.springframework.stereotype.Component;
 public class VideoPO {
 
   @TableId
-  private long id;
-  private long userId;
+  private Long id;
+  private Long userId;
   private String videoName;
   private String videoTitle;
   private String videoType;
   private String videoDescription;
   private String coverUrl;
   private String dataUrl;
-  private long videoStatus;
+  private Long videoStatus;
 
   private java.sql.Timestamp createTime;
   private java.sql.Timestamp updateTime;
-  private long isDeleted;
+  private Long isDeleted;
 
 
 

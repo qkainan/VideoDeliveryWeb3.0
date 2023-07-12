@@ -13,10 +13,10 @@ import java.math.BigDecimal;
 @AllArgsConstructor
 public class CartVO {
 
-    private long id;
-    private long userId;
-    private long commodityId;
-    private long addressId;
+    private Long id;
+    private Long userId;
+    private Long commodityId;
+    private Long addressId;
 
     private String commodityDescription;
     private BigDecimal price;
@@ -24,13 +24,13 @@ public class CartVO {
     private BigDecimal totalPrice;
 
     //1：已购买 0：未购买
-    private long orderStatus;
+    private Long orderStatus;
 
 
     private java.sql.Timestamp updateTime;
 
 
-    public CartVO(long id, long userId, long commodityId, long addressId, String commodityDescription, BigDecimal price, BigDecimal commodityNum, BigDecimal totalPrice, long orderStatus) {
+    public CartVO(Long id, Long userId, Long commodityId, Long addressId, String commodityDescription, BigDecimal price, BigDecimal commodityNum, BigDecimal totalPrice, Long orderStatus) {
         this.id = id;
         this.userId = userId;
         this.commodityId = commodityId;

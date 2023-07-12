@@ -15,7 +15,7 @@ public class OrderController {
 
     //收货后，改变订单状态
     @PostMapping("/receivingCommodity")
-    public ResponseResult receivingCommodity(long orderId){
+    public ResponseResult receivingCommodity(Long orderId){
         return orderService.receivingCommodity(orderId);
     }
 

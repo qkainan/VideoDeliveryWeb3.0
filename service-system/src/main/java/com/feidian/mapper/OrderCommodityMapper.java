@@ -7,7 +7,7 @@ import org.springframework.stereotype.Repository;
 @Repository
 @Mapper
 public interface OrderCommodityMapper {
-    void insertOrderCommodity(long id, long id1, long commodityNum);
+    void insertOrderCommodity(Long id, Long id1, Long commodityNum);
 
-    OrderCommodityPO findById(long id);
+    OrderCommodityPO findById(Long id);
 }

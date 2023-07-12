@@ -13,8 +13,8 @@ import java.util.List;
 @AllArgsConstructor
 public class VideoDTO {
 
-    private long videoId;
-    private long userId;
+    private Long videoId;
+    private Long userId;
 
     private String videoName;
     private String videoTitle;

@@ -203,7 +203,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public ResponseResult viewUserHomepage() {
-        long userId = JwtUtil.getUserId();
+        Long userId = JwtUtil.getUserId();
 
         UserPO userPO = userMapper.findById(userId);
 

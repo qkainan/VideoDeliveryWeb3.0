@@ -15,15 +15,15 @@ import org.springframework.stereotype.Component;
 public class AddressPO {
 
   @TableId
-  private long id;
-  private long userId;
+  private Long id;
+  private Long userId;
   private String addressName;
 
-  private long addressStatus;
+  private Long addressStatus;
 
   private java.sql.Timestamp createTime;
   private java.sql.Timestamp updateTime;
-  private long isDeleted;
+  private Long isDeleted;
 
 
 }

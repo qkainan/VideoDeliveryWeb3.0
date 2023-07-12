@@ -14,9 +14,9 @@ import java.util.List;
 @AllArgsConstructor
 public class CommodityDTO {
 
-    private long commodityId;
+    private Long commodityId;
 
-    private  long userId;
+    private  Long userId;
     private String commodityName;
     private String commodityType;
     private BigDecimal price;
@@ -27,7 +27,7 @@ public class CommodityDTO {
     private String coverUrl;
     private List<String> imageUrl;
 
-    public CommodityDTO(long commodityId, String commodityName, String commodityType, BigDecimal price, String commodityAddress, String commodityDescription) {
+    public CommodityDTO(Long commodityId, String commodityName, String commodityType, BigDecimal price, String commodityAddress, String commodityDescription) {
         this.commodityId = commodityId;
         this.commodityName = commodityName;
         this.commodityType = commodityType;

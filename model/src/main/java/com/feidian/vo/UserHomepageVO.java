@@ -16,7 +16,7 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 public class UserHomepageVO {
-    private long id;
+    private Long id;
     private String username;
     private String userDescription;
     private String phone;

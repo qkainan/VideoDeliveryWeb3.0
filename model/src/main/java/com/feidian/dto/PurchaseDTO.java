@@ -11,11 +11,11 @@ import org.springframework.stereotype.Component;
 @AllArgsConstructor
 public class PurchaseDTO {
 
-    private long id;
-    private long orderId;
-    private long commodityId;
-    private long commodityNum;
+    private Long id;
+    private Long orderId;
+    private Long commodityId;
+    private Long commodityNum;
     //收货地址
-    private long addressId;
+    private Long addressId;
 
 }

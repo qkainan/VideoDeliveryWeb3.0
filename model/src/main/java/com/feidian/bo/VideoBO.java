@@ -11,8 +11,8 @@ import org.springframework.stereotype.Component;
 @AllArgsConstructor
 public class VideoBO {
 
-  private long id;
-  private long userId;
+  private Long id;
+  private Long userId;
 
   private String videoName;
   private String videoTitle;
@@ -21,12 +21,12 @@ public class VideoBO {
   private String coverUrl;
   private String dataUrl;
 
-  private long videoStatus;
+  private Long videoStatus;
   private java.sql.Timestamp createTime;
   private java.sql.Timestamp updateTime;
-  private long isDeleted;
+  private Long isDeleted;
 
-  public VideoBO(long userId, String videoName, String videoTitle, String videoType, String videoDescription, String coverUrl, String dataUrl, long videoStatus) {
+  public VideoBO(Long userId, String videoName, String videoTitle, String videoType, String videoDescription, String coverUrl, String dataUrl, Long videoStatus) {
 
     this.userId = userId;
     this.videoName = videoName;
@@ -38,7 +38,7 @@ public class VideoBO {
     this.videoStatus = videoStatus;
   }
 
-  public VideoBO(long id, String videoTitle, String videoType, String videoDescription) {
+  public VideoBO(Long id, String videoTitle, String videoType, String videoDescription) {
     this.id = id;
     this.videoTitle = videoTitle;
     this.videoType = videoType;

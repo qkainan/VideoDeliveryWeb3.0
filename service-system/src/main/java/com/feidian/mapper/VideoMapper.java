@@ -13,13 +13,13 @@ import java.util.List;
 public interface VideoMapper {
     void insertVideo(VideoBO videoBO);
 
-    VideoPO findByVideoId(@Param("videoId") long videoId);
+    VideoPO findByVideoId(@Param("videoId") Long videoId);
 
     void updateVideoInfo(VideoBO videoBO);
 
-    void deleteVideo(long videoId);
+    void deleteVideo(Long videoId);
 
-    List<VideoPO> findByUserId(long userId);
+    List<VideoPO> findByUserId(Long userId);
 
 
 

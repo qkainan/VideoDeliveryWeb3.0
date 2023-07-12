@@ -11,7 +11,7 @@ import org.springframework.stereotype.Component;
 @AllArgsConstructor
 public class UserDTO {
 
-    private long id;
+    private Long id;
     private String headUrl;
     private String userDescription;
 

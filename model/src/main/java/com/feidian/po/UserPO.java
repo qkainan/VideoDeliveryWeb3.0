@@ -15,7 +15,7 @@ import org.springframework.stereotype.Component;
 public class UserPO {
 
   @TableId
-  private long id;
+  private Long id;
   private String username;
   private String password;
   private String nickname;
@@ -25,11 +25,11 @@ public class UserPO {
   private String userDescription;
   private String emailAddress;
 
-  private long userStatus;
+  private Long userStatus;
 
   private java.sql.Timestamp createTime;
   private java.sql.Timestamp updateTime;
-  private long isDeleted;
+  private Long isDeleted;
 
 
 }

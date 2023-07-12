@@ -15,8 +15,8 @@ import java.math.BigDecimal;
 @TableName(value = "commodity")
 public class CommodityPO {
 
-  private long id;
-  private long userId;
+  private Long id;
+  private Long userId;
 
   private String commodityName;
   private String commodityType;
@@ -25,11 +25,11 @@ public class CommodityPO {
   private String commodityAddress;
   private String coverUrl;
 
-  private long commodityStatus;
+  private Long commodityStatus;
 
   private java.sql.Timestamp createTime;
   private java.sql.Timestamp updateTime;
-  private long isDeleted;
+  private Long isDeleted;
 
 
 

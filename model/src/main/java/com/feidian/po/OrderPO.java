@@ -15,15 +15,15 @@ import org.springframework.stereotype.Component;
 public class OrderPO {
 
   @TableId
-  private long id;
-  private long buyerId;
-  private long sellerId;
+  private Long id;
+  private Long buyerId;
+  private Long sellerId;
   private String addressName;
-  private long orderStatus;
+  private Long orderStatus;
 
   private java.sql.Timestamp createTime;
   private java.sql.Timestamp updateTime;
-  private long isDeleted;
+  private Long isDeleted;
 
 
 }

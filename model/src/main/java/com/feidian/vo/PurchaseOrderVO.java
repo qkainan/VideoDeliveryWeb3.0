@@ -12,14 +12,14 @@ import java.math.BigDecimal;
 @AllArgsConstructor
 public class PurchaseOrderVO {
 
-    private long id;
+    private Long id;
     private String commodityName;
 
     private BigDecimal price;
 
     private String commodityAddress;
 
-    private long status;
+    private Long status;
 
     private java.sql.Timestamp updateTime;
 

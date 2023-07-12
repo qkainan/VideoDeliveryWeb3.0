@@ -11,14 +11,14 @@ import java.util.List;
 @Mapper
 public interface CommodityMapper {
 
-    CommodityPO findByCommodityId( long commodityId);
+    CommodityPO findByCommodityId( Long commodityId);
 
     void insertCommodity(CommodityBO commodityBO);
 
-    void deleteCommodity(long commodityId);
+    void deleteCommodity(Long commodityId);
 
     void updateCommodity(CommodityBO commodityBO);
 
-    List<CommodityPO> findByUserId(long userId);
+    List<CommodityPO> findByUserId(Long userId);
 
 }

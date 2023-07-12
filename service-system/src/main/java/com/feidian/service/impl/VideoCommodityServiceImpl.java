@@ -22,11 +22,11 @@ public class VideoCommodityServiceImpl implements VideoCommodityService {
 
     @Override
     public ResponseResult uploadVideoCommodity(VideoDTO videoDTO) {
-        long userId = JwtUtil.getUserId();
+        Long userId = JwtUtil.getUserId();
         VideoPO videoPO = videoMapper.findByVideoId(videoDTO.getVideoId());
 
         //将商品安排到video推荐商品里
-        for (long cId : videoDTO.getCommodityIdList()) {
+        for (Long cId : videoDTO.getCommodityIdList()) {
             VideoCommodityBO videoCommodityBO = new VideoCommodityBO(userId, videoDTO.getVideoId(), cId,
                     videoPO.getVideoStatus());
             videoCommodityMapper.insertVideoCommodity(videoCommodityBO);
@@ -50,7 +50,7 @@ public class VideoCommodityServiceImpl implements VideoCommodityService {
 //    }
 //
 //    @Override
-//    public List<VideoCommodityPO> findByVideoId(long videoId) {
+//    public List<VideoCommodityPO> findByVideoId(Long videoId) {
 //        return videoCommodityMapper.findByVideoId(videoId);
 //    }
 //

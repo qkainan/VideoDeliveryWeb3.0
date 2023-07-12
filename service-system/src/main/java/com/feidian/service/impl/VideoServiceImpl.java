@@ -44,7 +44,7 @@ public class VideoServiceImpl implements VideoService {
     @Transactional
     @Override
     public ResponseResult receivingVideo(VideoDTO receivingVideoDTO, MultipartFile dataFile, MultipartFile coverFile) {
-        long userId = JwtUtil.getUserId();
+        Long userId = JwtUtil.getUserId();
 
         String videoDataUrl = "";
         String videoCoverUrl = "";
@@ -75,7 +75,7 @@ public class VideoServiceImpl implements VideoService {
     }
 
     @Override
-    public ResponseResult displayVideo(long id) throws IOException, URISyntaxException {
+    public ResponseResult displayVideo(Long id) throws IOException, URISyntaxException {
         VideoPO videoPO = videoMapper.findByVideoId(id);
         UserPO userPO = userMapper.findById(videoPO.getUserId());
 
@@ -107,19 +107,19 @@ public class VideoServiceImpl implements VideoService {
 
     @Transactional
     @Override
-    public ResponseResult deleteVideo(long videoId) {
+    public ResponseResult deleteVideo(Long videoId) {
         videoMapper.deleteVideo(videoId);
         return ResponseResult.successResult();
     }
 
     @Override
-    public ResponseResult beforeUpdateVideoInfo(long videoId) {
+    public ResponseResult beforeUpdateVideoInfo(Long videoId) {
         return ResponseResult.successResult(videoMapper.findByVideoId(videoId));
     }
 
     @Override
     public ResponseResult viewPerVideos() {
-        long userId = JwtUtil.getUserId();
+        Long userId = JwtUtil.getUserId();
         List<VideoPO> videoPOList = videoMapper.findByUserId(userId);
 
         return ResponseResult.successResult(videoPOList);
@@ -127,10 +127,10 @@ public class VideoServiceImpl implements VideoService {
 
 
 //    @Override
-//    public long[] homeRecommend() {
+//    public Long[] homeRecommend() {
 //
 //        //创建一个新的数组
-//        long[] arr = new long[40];
+//        Long[] arr = new Long[40];
 //        //把随机数存入数组当中
 //        Random r = new Random();
 //        for (Integer i = 0; i < arr.length; i++) {

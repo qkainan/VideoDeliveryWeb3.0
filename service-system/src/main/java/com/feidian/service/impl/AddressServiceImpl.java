@@ -6,6 +6,7 @@ import com.feidian.mapper.AddressMapper;
 import com.feidian.responseResult.ResponseResult;
 import com.feidian.service.AddressService;
 import com.feidian.util.JwtUtil;
+import com.feidian.util.SecurityContextUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -17,7 +18,8 @@ public class AddressServiceImpl implements AddressService {
 
     @Override
     public ResponseResult uploadUserAddress(AddressDTO addressDTO) {
-        addressDTO.setUserId(JwtUtil.getUserId());
+        
+        addressDTO.setUserId(SecurityContextUtils.getUserId());
 
         AddressBO addressBO = new AddressBO(addressDTO.getId(),addressDTO.getUserId(),addressDTO.getAddressName());
         addressMapper.insertAddress(addressBO);
@@ -25,7 +27,7 @@ public class AddressServiceImpl implements AddressService {
     }
 
     @Override
-    public ResponseResult deleteAddress(long addressId) {
+    public ResponseResult deleteAddress(Long addressId) {
         addressMapper.deleteAddress(addressId);
         return ResponseResult.successResult();
     }

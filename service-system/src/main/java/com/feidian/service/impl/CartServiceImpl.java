@@ -40,7 +40,7 @@ public class CartServiceImpl implements CartService {
     @Override
     public ResponseResult uploadCart(CartDTO cartDTO) {
         CommodityPO commodityPO = commodityMapper.findByCommodityId(cartDTO.getCommodityId());
-        long orderStatus = 0;
+        Long orderStatus = 0;
 
         BigDecimal totalPrice = commodityPO.getPrice().multiply(cartDTO.getCommodityNum());
 
@@ -77,14 +77,14 @@ public class CartServiceImpl implements CartService {
     }
 
     @Override
-    public ResponseResult deleteCart(long cartId) {
+    public ResponseResult deleteCart(Long cartId) {
         cartMapper.deleteCart(cartId);
         return ResponseResult.successResult();
     }
 
     @Override
     public ResponseResult cartPurchase(PurchaseDTO purchaseDTO) {
-        long userId = JwtUtil.getUserId();
+        Long userId = JwtUtil.getUserId();
 
         if (purchaseDTO.getId() != 0) {
             CartPO cartPO = cartMapper.findByCartId(purchaseDTO.getId());
@@ -94,7 +94,7 @@ public class CartServiceImpl implements CartService {
         }
 
         //状态（5：已收货 4：代发货 3：已发货 1：待发货 0：已退款 ）
-        long orderStatus = 1;
+        Long orderStatus = 1;
         CommodityPO commodityPO = commodityMapper.findByCommodityId(purchaseDTO.getCommodityId());
         AddressPO address = addressMapper.findByAddressId(purchaseDTO.getAddressId());
 

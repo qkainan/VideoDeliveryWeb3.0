@@ -28,7 +28,7 @@ public class CartController {
 
     //删除购物车
     @PostMapping("/deleteCart")
-    public ResponseResult deleteCart(long cartId){
+    public ResponseResult deleteCart(Long cartId){
         return cartService.deleteCart(cartId);
     }
 

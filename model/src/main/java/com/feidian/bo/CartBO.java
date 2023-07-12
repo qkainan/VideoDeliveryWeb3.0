@@ -13,10 +13,10 @@ import java.math.BigDecimal;
 @AllArgsConstructor
 public class CartBO {
 
-    private long id;
-    private long userId;
-    private long commodityId;
-    private long addressId;
+    private Long id;
+    private Long userId;
+    private Long commodityId;
+    private Long addressId;
 
     private String commodityDescription;
     private BigDecimal price;
@@ -24,6 +24,6 @@ public class CartBO {
     private BigDecimal totalPrice;
 
     //1：已购买 0：未购买
-    private long orderStatus;
+    private Long orderStatus;
 
 }

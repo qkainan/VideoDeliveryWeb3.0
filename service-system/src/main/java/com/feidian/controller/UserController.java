@@ -36,7 +36,7 @@ public class UserController {
     }
 
     @PostMapping("/deleteAddress")
-    public ResponseResult deleteAddress(long addressId){
+    public ResponseResult deleteAddress(Long addressId){
         return addressService.deleteAddress(addressId);
     }
 

@@ -12,13 +12,13 @@ public interface VideoService {
 
     ResponseResult receivingVideo(VideoDTO receivingVideoDTO, MultipartFile dataFile, MultipartFile coverFile);
 
-    ResponseResult displayVideo(long id) throws IOException, URISyntaxException;
+    ResponseResult displayVideo(Long id) throws IOException, URISyntaxException;
 
     ResponseResult updateVideoInfo(VideoDTO videoDTO);
 
-    ResponseResult deleteVideo(long videoId);
+    ResponseResult deleteVideo(Long videoId);
 
-    ResponseResult beforeUpdateVideoInfo(long videoId);
+    ResponseResult beforeUpdateVideoInfo(Long videoId);
 
     ResponseResult viewPerVideos();
 }

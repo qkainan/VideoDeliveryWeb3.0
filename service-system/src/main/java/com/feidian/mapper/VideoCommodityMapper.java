@@ -14,6 +14,6 @@ public interface VideoCommodityMapper {
 
     void updateVideoCommodityInfo(VideoCommodityBO videoCommodityBO);
 
-    List<VideoCommodityPO> findByVideoId(long videoId);
+    List<VideoCommodityPO> findByVideoId(Long videoId);
 
 }

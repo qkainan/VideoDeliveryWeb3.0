@@ -15,12 +15,12 @@ public class CommodityImageServiceImpl implements CommodityImageService {
     private CommodityImageMapper commodityImageMapper;
 
     @Override
-    public void insertCommodityImage(long commodityId, String imageUrl, long imageStatus ) {
+    public void insertCommodityImage(Long commodityId, String imageUrl, Long imageStatus ) {
         commodityImageMapper.insertCommodityImage(commodityId, imageUrl, imageStatus);
     }
 
     @Override
-    public List<CommodityImagePO> findByCommodityId(long CommodityId) {
+    public List<CommodityImagePO> findByCommodityId(Long CommodityId) {
         return commodityImageMapper.findByCommodityId(CommodityId);
     }
 }

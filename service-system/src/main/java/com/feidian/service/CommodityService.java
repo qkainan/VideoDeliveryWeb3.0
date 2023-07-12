@@ -12,13 +12,13 @@ public interface CommodityService {
 
     ResponseResult uploadCommodity(CommodityDTO commodityDTO, MultipartFile coverFile, MultipartFile[] imageFile);
 
-    ResponseResult displayCommodity(long commodityId) throws URISyntaxException, IOException;
+    ResponseResult displayCommodity(Long commodityId) throws URISyntaxException, IOException;
 
-    ResponseResult deleteCommodity(long commodityId);
+    ResponseResult deleteCommodity(Long commodityId);
 
     ResponseResult updateCommodityInfo(CommodityDTO commodityDTO);
 
-    ResponseResult beforeUpdateCommodityInfo(long commodityId);
+    ResponseResult beforeUpdateCommodityInfo(Long commodityId);
 
     ResponseResult viewPerCommodities();
 }

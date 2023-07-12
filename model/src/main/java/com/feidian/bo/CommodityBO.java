@@ -14,8 +14,8 @@ import java.math.BigDecimal;
 @AllArgsConstructor
 public class CommodityBO {
 
-  private long id;
-  private long userId;
+  private Long id;
+  private Long userId;
 
   private String commodityName;
   private String commodityType;
@@ -24,14 +24,14 @@ public class CommodityBO {
   private String commodityAddress;
   private String coverUrl;
 
-  private long commodityStatus;
+  private Long commodityStatus;
 
   private java.sql.Timestamp createTime;
   private java.sql.Timestamp updateTime;
-  private long isDeleted;
+  private Long isDeleted;
 
 
-  public CommodityBO(long id, long userId, String commodityName, String commodityType, BigDecimal price, String commodityDescription, String commodityAddress, String coverUrl) {
+  public CommodityBO(Long id, Long userId, String commodityName, String commodityType, BigDecimal price, String commodityDescription, String commodityAddress, String coverUrl) {
     this.id = id;
     this.userId = userId;
     this.commodityName = commodityName;
@@ -42,7 +42,7 @@ public class CommodityBO {
     this.coverUrl = coverUrl;
   }
 
-  public CommodityBO(long id, long userId, String commodityName, String commodityType, BigDecimal price, String commodityDescription, String commodityAddress) {
+  public CommodityBO(Long id, Long userId, String commodityName, String commodityType, BigDecimal price, String commodityDescription, String commodityAddress) {
     this.id = id;
     this.userId = userId;
     this.commodityName = commodityName;

@@ -14,10 +14,10 @@ import java.util.List;
 @AllArgsConstructor
 public class DisplayVideoVO {
 
-    private long videoId;
+    private Long videoId;
     private String videoTitle;
 
-    private long userId;
+    private Long userId;
     private String username;
 
 

@@ -11,23 +11,23 @@ import org.springframework.stereotype.Component;
 @AllArgsConstructor
 public class VideoCommodityBO {
 
-  private long id;
-  private long userId;
-  private long videoId;
-  private long commodityId;
+  private Long id;
+  private Long userId;
+  private Long videoId;
+  private Long commodityId;
 
-  private long videoStatus;
+  private Long videoStatus;
 
 
 
-  public VideoCommodityBO(long userId, long videoId, long commodityId, long videoStatus) {
+  public VideoCommodityBO(Long userId, Long videoId, Long commodityId, Long videoStatus) {
     this.userId = userId;
     this.videoId = videoId;
     this.commodityId = commodityId;
     this.videoStatus = videoStatus;
   }
 
-  public VideoCommodityBO(long videoId, long commodityId) {
+  public VideoCommodityBO(Long videoId, Long commodityId) {
     this.videoId = videoId;
     this.commodityId = commodityId;
   }

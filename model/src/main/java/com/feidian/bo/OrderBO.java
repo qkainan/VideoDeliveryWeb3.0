@@ -11,19 +11,19 @@ import org.springframework.stereotype.Component;
 @AllArgsConstructor
 public class OrderBO {
 
-  private long id;
-  private long buyerId;
-  private long sellerId;
+  private Long id;
+  private Long buyerId;
+  private Long sellerId;
   private String addressName;
 
-  private long orderStatus;
+  private Long orderStatus;
 
   private java.sql.Timestamp createTime;
   private java.sql.Timestamp updateTime;
-  private long isDeleted;
+  private Long isDeleted;
 
 
-  public OrderBO(long buyerId, long sellerId, String addressName, long orderStatus) {
+  public OrderBO(Long buyerId, Long sellerId, String addressName, Long orderStatus) {
     this.buyerId = buyerId;
     this.sellerId = sellerId;
     this.addressName = addressName;

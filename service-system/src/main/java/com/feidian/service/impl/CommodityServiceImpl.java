@@ -34,7 +34,7 @@ public class CommodityServiceImpl implements CommodityService {
     @Transactional
     @Override
     public ResponseResult uploadCommodity(CommodityDTO commodityDTO, MultipartFile coverFile, MultipartFile[] imageFile) {
-        long userId = JwtUtil.getUserId();
+        Long userId = JwtUtil.getUserId();
 
         String commodityCoverUrl = "";
         String uploadCommodityCoverDir = "D:/uploads/commodities/cover/";
@@ -66,7 +66,7 @@ public class CommodityServiceImpl implements CommodityService {
     }
 
     @Override
-    public ResponseResult displayCommodity(long commodityId) throws URISyntaxException, IOException {
+    public ResponseResult displayCommodity(Long commodityId) throws URISyntaxException, IOException {
 
         CommodityPO commodityPO = commodityMapper.findByCommodityId(commodityId);
 
@@ -96,7 +96,7 @@ public class CommodityServiceImpl implements CommodityService {
     }
 
     @Override
-    public ResponseResult deleteCommodity(long commodityId) {
+    public ResponseResult deleteCommodity(Long commodityId) {
         commodityMapper.deleteCommodity(commodityId);
         return  ResponseResult.successResult(200, "删除成功");
     }
@@ -114,13 +114,13 @@ public class CommodityServiceImpl implements CommodityService {
     }
 
     @Override
-    public ResponseResult beforeUpdateCommodityInfo(long commodityId) {
+    public ResponseResult beforeUpdateCommodityInfo(Long commodityId) {
         return ResponseResult.successResult(commodityMapper.findByCommodityId(commodityId));
     }
 
     @Override
     public ResponseResult viewPerCommodities() {
-        long userId = JwtUtil.getUserId();
+        Long userId = JwtUtil.getUserId();
         List<CommodityPO> commodityPOList = commodityMapper.findByUserId(userId);
         return ResponseResult.successResult(commodityPOList);
     }
@@ -131,7 +131,7 @@ public class CommodityServiceImpl implements CommodityService {
 //    };
 //
 //    @Override
-//    public List<CommodityPO> findByUserId(long id) {
+//    public List<CommodityPO> findByUserId(Long id) {
 //        return commodityMapper.findByUserId(id);
 //    }
 //

@@ -11,7 +11,7 @@ import org.springframework.stereotype.Component;
 @AllArgsConstructor
 public class UserBO {
 
-    private long id;
+    private Long id;
     private String username;
     private String password;
     private String nickname;
@@ -28,13 +28,13 @@ public class UserBO {
         this.emailAddress = emailAddress;
     }
 
-    public UserBO(long id, String headUrl, String userDescription){
+    public UserBO(Long id, String headUrl, String userDescription){
         this.id = id;
         this.headUrl = headUrl;
         this.userDescription = userDescription;
     }
 
-    public UserBO(long id,String userDescription){
+    public UserBO(Long id,String userDescription){
         this.id = id;
         this.userDescription = userDescription;
     }
