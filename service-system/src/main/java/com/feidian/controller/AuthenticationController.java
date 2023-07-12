@@ -21,13 +21,6 @@ public class AuthenticationController {
     @Autowired
     private AuthenticationService authenticationService;
 
-
-    //邮箱注册
-    @PostMapping("/emailSignup")
-    public ResponseResult emailSignup(@RequestBody SignupDTO signupDTO) throws Exception {
-        return authenticationService.emailSignup(signupDTO);
-    }
-
     //发送验证码
     @PostMapping("/sendVerifyCode")
     public ResponseResult sendVerifyCode(@RequestBody SignupDTO signupDTO) {
@@ -46,11 +39,15 @@ public class AuthenticationController {
 
     //注册登录
     //快速注册
-    @PostMapping("/fastSignup")
+    @PostMapping("/user/fastSignup")
     public ResponseResult fastSignup(@RequestBody SignupDTO signupDTO){
         return authenticationService.fastSignup(signupDTO);
     }
 
-
+    //邮箱注册
+    @PostMapping("/user/emailSignup")
+    public ResponseResult emailSignup(@RequestBody SignupDTO signupDTO) throws Exception {
+        return authenticationService.emailSignup(signupDTO);
+    }
 
 }

@@ -18,10 +18,10 @@ import java.util.List;
 public class UserHomepageVO {
     private Long id;
     private String username;
-    private String userDescription;
+
     private String phone;
-    private String headUrl;
-    private String emailAddress;
+    private String avatar;
+    private String email;
 
     private List<VideoPO> videoPOList;
 

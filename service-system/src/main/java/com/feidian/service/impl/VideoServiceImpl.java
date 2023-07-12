@@ -7,12 +7,11 @@ import com.feidian.mapper.UserMapper;
 import com.feidian.mapper.VideoCommodityMapper;
 import com.feidian.mapper.VideoMapper;
 import com.feidian.po.CommodityPO;
-import com.feidian.po.UserPO;
+import com.feidian.po.SysUser;
 import com.feidian.po.VideoCommodityPO;
 import com.feidian.po.VideoPO;
 import com.feidian.responseResult.ResponseResult;
 import com.feidian.service.VideoService;
-import com.feidian.util.JwtUtil;
 import com.feidian.util.ReceivingFileUtil;
 import com.feidian.util.SecurityContextUtils;
 import com.feidian.util.UploadingFileUtil;
@@ -53,13 +52,13 @@ public class VideoServiceImpl implements VideoService {
         //Todo 最好放在配置文件
         // 定义保存路径
         String uploadVideoCoverDir = "D:/uploads/videos/cover/";
-        ReceivingFileUtil.saveFile(coverFile,uploadVideoCoverDir);
-        videoCoverUrl = ReceivingFileUtil.saveFile(coverFile,uploadVideoCoverDir);
+        ReceivingFileUtil.saveFile(coverFile, uploadVideoCoverDir);
+        videoCoverUrl = ReceivingFileUtil.saveFile(coverFile, uploadVideoCoverDir);
         receivingVideoDTO.setCoverUrl(videoCoverUrl);
 
         String uploadVideoDataDir = "D:/uploads/videos/data/";
-        ReceivingFileUtil.saveFile(dataFile,uploadVideoDataDir);
-        videoDataUrl = ReceivingFileUtil.saveFile(dataFile,uploadVideoDataDir);
+        ReceivingFileUtil.saveFile(dataFile, uploadVideoDataDir);
+        videoDataUrl = ReceivingFileUtil.saveFile(dataFile, uploadVideoDataDir);
         receivingVideoDTO.setDataUrl(videoDataUrl);
         receivingVideoDTO.setVideoName(dataFile.getOriginalFilename());
         receivingVideoDTO.setVideoName(dataFile.getOriginalFilename());
@@ -68,28 +67,28 @@ public class VideoServiceImpl implements VideoService {
 
         VideoBO videoBO = new VideoBO(receivingVideoDTO.getUserId(), receivingVideoDTO.getVideoName(),
                 receivingVideoDTO.getVideoTitle(), receivingVideoDTO.getVideoType(), receivingVideoDTO.getVideoDescription(),
-                receivingVideoDTO.getCoverUrl(), receivingVideoDTO.getDataUrl(),1L);
+                receivingVideoDTO.getCoverUrl(), receivingVideoDTO.getDataUrl(), 1L);
 
         videoMapper.insertVideo(videoBO);
 
-        return ResponseResult.successResult(200,"上传视频成功");
+        return ResponseResult.successResult(200, "上传视频成功");
     }
 
     @Override
     public ResponseResult displayVideo(Long id) throws IOException, URISyntaxException {
         VideoPO videoPO = videoMapper.findByVideoId(id);
-        UserPO userPO = userMapper.findById(videoPO.getUserId());
+        SysUser user = userMapper.selectById(videoPO.getUserId());
 
         List<VideoCommodityPO> videoCommodityPOList = videoCommodityMapper.findByVideoId(id);
         List<CommodityPO> commodityPOList = new ArrayList<>();
 
-        for (VideoCommodityPO vc: videoCommodityPOList) {
+        for (VideoCommodityPO vc : videoCommodityPOList) {
             CommodityPO byCommodityIdPO = commodityMapper.findByCommodityId(vc.getCommodityId());
             commodityPOList.add(byCommodityIdPO);
         }
 
-        DisplayVideoVO displayVideoVo = new DisplayVideoVO(videoPO.getId(), videoPO.getVideoTitle(), userPO.getId(),
-                userPO.getUsername(), videoPO.getDataUrl(), videoPO.getCoverUrl(),
+        DisplayVideoVO displayVideoVo = new DisplayVideoVO(videoPO.getId(), videoPO.getVideoTitle(), user.getId(),
+                user.getUserName(), videoPO.getDataUrl(), videoPO.getCoverUrl(),
                 videoPO.getVideoDescription(), videoPO.getCreateTime(), commodityPOList,
                 UploadingFileUtil.getFileVideo(videoPO.getDataUrl()).getFileByte(),
                 UploadingFileUtil.getFileImage(videoPO.getCoverUrl()).getFileByte());
@@ -100,7 +99,7 @@ public class VideoServiceImpl implements VideoService {
     @Transactional
     @Override
     public ResponseResult updateVideoInfo(VideoDTO videoDTO) {
-        VideoBO videoBO = new VideoBO(videoDTO.getVideoId(),videoDTO.getVideoTitle(), videoDTO.getVideoType(),
+        VideoBO videoBO = new VideoBO(videoDTO.getVideoId(), videoDTO.getVideoTitle(), videoDTO.getVideoType(),
                 videoDTO.getVideoDescription());
         videoMapper.updateVideoInfo(videoBO);
         return ResponseResult.successResult();

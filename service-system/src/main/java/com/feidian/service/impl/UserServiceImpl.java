@@ -1,33 +1,22 @@
 package com.feidian.service.impl;
 
-import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
+
 import com.feidian.bo.UserBO;
-import com.feidian.dto.LoginDTO;
-import com.feidian.dto.SignupDTO;
 import com.feidian.dto.UserDTO;
 import com.feidian.mapper.*;
 import com.feidian.po.*;
 import com.feidian.responseResult.ResponseResult;
 import com.feidian.service.UserService;
 import com.feidian.util.AESUtil;
-import com.feidian.util.JwtUtil;
 import com.feidian.util.ReceivingFileUtil;
 import com.feidian.util.SecurityContextUtils;
 import com.feidian.vo.UserHomepageVO;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.util.StringUtils;
 import org.springframework.web.multipart.MultipartFile;
 
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
-import java.util.UUID;
-
-import static com.feidian.enums.HttpCodeEnum.REQUIRE_USERNAME;
-
 
 @Service
 public class UserServiceImpl implements UserService {
@@ -79,7 +68,7 @@ public class UserServiceImpl implements UserService {
         Long userId = SecurityContextUtils.getUserId();
 
         //TODO
-        UserPO userPO = userMapper.selectById(userId);
+        SysUser user = userMapper.selectById(userId);
 
         List<VideoPO> videoPOList = videoMapper.findByUserId(userId);
         List<CommodityPO> commodityPOList = commodityMapper.findByUserId(userId);
@@ -87,10 +76,10 @@ public class UserServiceImpl implements UserService {
         List<OrderPO> sellerOrderVoList = orderMapper.findBySellerId(userId);
         List<CartPO> cartList = cartMapper.findByUserId(userId);
 
-        UserHomepageVO userHomepageVo = new UserHomepageVO(userId, userPO.getUsername(),
-                userPO.getUserDescription(), userPO.getPhone(), userPO.getHeadUrl(),
-                userPO.getEmailAddress(), videoPOList, commodityPOList, buyerOrderVoList,sellerOrderVoList, cartList);
-        return  ResponseResult.successResult(userHomepageVo);
+        UserHomepageVO userHomepageVo = new UserHomepageVO(userId, user.getUserName(),
+                user.getPhonenumber(), user.getAvatar(), user.getEmail(),
+                videoPOList, commodityPOList, buyerOrderVoList, sellerOrderVoList, cartList);
+        return ResponseResult.successResult(userHomepageVo);
     }
 
 
