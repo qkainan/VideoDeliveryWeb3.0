@@ -17,6 +17,6 @@ public interface UserMapper extends BaseMapper<SysUser> {
 
     void updateUserInfo(UserBO userBO);
 
-    UserPO findById(long id);
+    UserPO findById(Long id);
 
 }
