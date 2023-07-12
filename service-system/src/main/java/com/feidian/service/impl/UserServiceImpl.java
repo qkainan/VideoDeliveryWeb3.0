@@ -1,5 +1,6 @@
 package com.feidian.service.impl;
 
+import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.feidian.bo.UserBO;
 import com.feidian.dto.LoginDTO;
 import com.feidian.dto.SignupDTO;
@@ -45,134 +46,6 @@ public class UserServiceImpl implements UserService {
     @Autowired
     private OrderMapper orderMapper;
 
-    @Autowired
-    private OrderCommodityMapper orderCommodityMapper;
-
-
-//    @Transactional
-//    @Override
-//    public ResponseResult fastSignup(SignupDTO signupDTO) {
-//        //Todo 校验密码是否符合强度要求
-//        // 1.只能包含英文字母、阿拉伯数字和下划线
-//        // 2.密码长度在8到25之间
-//        // 3.再次输入密码需与第一次输入的密码一致
-//        // 4.加密密码
-//        String regexPwd = "\\w{8,25}";
-//        if (signupDTO.getUsername()==null){
-//            return ResponseResult.errorResult(REQUIRE_USERNAME);
-//        }
-//
-//        if (signupDTO.getPassword().matches(regexPwd) == false) {
-//            return ResponseResult.errorResult(403, "密码不符合要求");
-//        }
-//
-//        if (!signupDTO.getPassword().equals(signupDTO.getRePwd())) {
-//            return ResponseResult.errorResult(403, "第二次输入密码与第一次不同");
-//        }
-//
-//        //加密密码并创建用户
-//        //补全16位
-//        String encryptUserPwd = null;
-//
-//        encryptUserPwd = getEncryptUserPwd(signupDTO.getPassword()).getData().toString();
-//        UserBO userBO = new UserBO(signupDTO.getUsername(), encryptUserPwd,
-//                signupDTO.getNickname(), signupDTO.getEmailAddress());
-//        userMapper.insertUser(userBO);
-//        return ResponseResult.successResult(200, "快速注册成功");
-//    }
-//
-//    @Transactional
-//    @Override
-//    public ResponseResult emailSignup(SignupDTO signupDTO) {
-//        //Todo 校验密码是否符合强度要求
-//        // 1.只能包含英文字母、阿拉伯数字和下划线
-//        // 2.密码长度在8到16之间
-//        // 3.再次输入密码需与第一次输入的密码一致
-//        // 4.加密密码
-//        // 5.邮箱验证
-//        String regexPwd = "\\w{8,16}";
-//
-//        if (signupDTO.getUsername()==null){
-//            return ResponseResult.errorResult(REQUIRE_USERNAME);
-//        }
-//
-//        if (false == signupDTO.getPassword().matches(regexPwd)) {
-//            return ResponseResult.errorResult(403,"密码不符合要求");
-//        }
-//
-//        if (!signupDTO.getPassword().equals(signupDTO.getRePwd())) {
-//            return ResponseResult.successResult(403, "第二次输入密码与第一次不同");
-//        }
-//
-//        String regexEmailAddress = "\\w+@[\\w&&[^_]]{2,7}(\\.[a-zA-Z]{2,4}){1,3}";
-//
-//        if (!signupDTO.getEmailAddress().matches(regexEmailAddress)) {
-//            return ResponseResult.errorResult(403,"邮箱格式不正确");
-//        }
-//
-//        //验证邮箱验证码
-//        Boolean verifyResult = ((String)redisTemplate.opsForValue().get(signupDTO.getUsername()+ "verifyCode")).equals(signupDTO.getVerifyCode());
-//
-//        if (false == verifyResult) {
-//            return  ResponseResult.errorResult(403,"验证码错误");
-//        }
-//
-//        String encryptUserPwd = getEncryptUserPwd(signupDTO.getPassword()).getData().toString();
-//        UserBO userBO = new UserBO(signupDTO.getUsername(), encryptUserPwd,
-//                signupDTO.getNickname(), signupDTO.getEmailAddress());
-//        userMapper.insertUser(userBO);
-//        return ResponseResult.successResult(200, "邮箱注册成功");
-//    }
-//
-//    @Override
-//    public ResponseResult login(LoginDTO loginDTO) {
-//        if (loginDTO.getPassword().length() >16 && loginDTO.getPassword().length() <8 ) {
-//            return ResponseResult.errorResult(403, "密码不符合要求");
-//        }
-//
-//        //密码符合要求则开始验证
-//        UserPO userPO = userMapper.findByName(loginDTO.getUsername());
-//        Long id01 = userPO.getId();
-//        String username01 = userPO.getUsername();
-//
-//        if (!StringUtils.hasText(username01)) {
-//            return ResponseResult.errorResult(403,"用户名不存在");
-//        }
-//
-//        //验证密码是否正确
-//        //补全用户输入的密码
-//        String userPwd = "";
-//        StringBuilder stringBuilder = new StringBuilder(loginDTO.getPassword());
-//        if (16 > loginDTO.getPassword().length()){
-//            for (int i = loginDTO.getPassword().length() ; i < 16; i++) {
-//                stringBuilder = stringBuilder.append("=");
-//            }
-//        }
-//        userPwd = stringBuilder.toString();
-//
-//        //获取解密后的密码
-//        String decryptUserPwd = null;
-//        try {
-//            decryptUserPwd = AESUtil.decryptByAES(userPO.getPassword());
-//        } catch (Exception e) {
-//            throw new RuntimeException(e);
-//        }
-//
-//        if (!decryptUserPwd.equals(userPwd)) {
-//            userPO.setUserStatus(1L);
-//            return ResponseResult.errorResult(403,"密码不正确");
-//        }
-//
-//        //如果正确 生成token返回,并记录日志
-//        Map<String, Object> map;
-//        map = new HashMap<>();
-//        String token = JwtUtil.createJWT(UUID.randomUUID().toString(), String.valueOf(id01), null);
-//        map.put("Authorization", token);
-//        userPO.setUserStatus(0L);
-//
-//        return ResponseResult.successResult(map);
-//    }
-
     @Transactional
     @Override
     public ResponseResult updateUserHead(MultipartFile headFile) {
@@ -205,7 +78,8 @@ public class UserServiceImpl implements UserService {
     public ResponseResult viewUserHomepage() {
         Long userId = SecurityContextUtils.getUserId();
 
-        UserPO userPO = userMapper.findById(userId);
+        //TODO
+        UserPO userPO = userMapper.selectById(userId);
 
         List<VideoPO> videoPOList = videoMapper.findByUserId(userId);
         List<CommodityPO> commodityPOList = commodityMapper.findByUserId(userId);

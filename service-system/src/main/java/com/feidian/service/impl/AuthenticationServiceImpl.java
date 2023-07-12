@@ -5,9 +5,11 @@ import com.feidian.bo.UserBO;
 import com.feidian.dto.LoginDTO;
 import com.feidian.dto.SignupDTO;
 import com.feidian.enums.HttpCodeEnum;
+import com.feidian.mapper.UserMapper;
 import com.feidian.po.SysUser;
 import com.feidian.responseResult.ResponseResult;
 import com.feidian.service.AuthenticationService;
+import com.feidian.service.UserService;
 import com.feidian.util.JwtUtil;
 import com.feidian.util.RedisCache;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,6 +27,9 @@ import java.util.Objects;
 
 @Service
 public class AuthenticationServiceImpl implements AuthenticationService {
+
+    @Autowired
+    private UserMapper userMapper;
 
     @Autowired
     private AuthenticationManager authenticationManager;
