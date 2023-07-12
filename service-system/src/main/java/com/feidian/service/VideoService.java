@@ -10,12 +10,6 @@ import java.net.URISyntaxException;
 
 public interface VideoService {
 
-
-//    long[] homeRecommend();
-
-//    List<VideoPO> findByUserId(long userId);
-
-
     ResponseResult receivingVideo(VideoDTO receivingVideoDTO, MultipartFile dataFile, MultipartFile coverFile);
 
     ResponseResult displayVideo(long id) throws IOException, URISyntaxException;
