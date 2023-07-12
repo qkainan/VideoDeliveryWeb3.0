@@ -1,5 +1,7 @@
 package com.feidian.po;
 
+import com.baomidou.mybatisplus.annotation.TableId;
+import com.baomidou.mybatisplus.annotation.TableName;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -11,8 +13,10 @@ import java.math.BigDecimal;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
+@TableName(value = "cart")
 public class CartPO {
 
+  @TableId
   private long id;
   private long userId;
   private long commodityId;

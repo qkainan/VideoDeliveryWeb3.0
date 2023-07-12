@@ -29,6 +29,7 @@ public class LoginUser implements UserDetails {
 
 
     //存储SpringSecurity所需要的权限信息的集合
+    //在序列化时，将这个集合忽略。 原因时：出于安全考虑，redis在存储数据时不会将GrantedAuthority存进去，会报错。
     @JSONField(serialize = false)
     private List<GrantedAuthority> authorities;
 
