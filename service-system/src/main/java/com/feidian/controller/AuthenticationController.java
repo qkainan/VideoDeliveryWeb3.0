@@ -1,8 +1,8 @@
 package com.feidian.controller;
 
+import com.feidian.annotation.RequireCaptcha;
 import com.feidian.dto.LoginDTO;
 import com.feidian.dto.SignupDTO;
-import com.feidian.po.SysUser;
 import com.feidian.responseResult.ResponseResult;
 import com.feidian.service.AuthenticationService;
 import com.feidian.service.UtilService;
@@ -45,6 +45,7 @@ public class AuthenticationController {
     }
 
     //邮箱注册
+    @RequireCaptcha
     @PostMapping("/user/emailSignup")
     public ResponseResult emailSignup(@RequestBody SignupDTO signupDTO) throws Exception {
         return authenticationService.emailSignup(signupDTO);

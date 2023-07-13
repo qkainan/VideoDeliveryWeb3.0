@@ -59,12 +59,16 @@ public class AuthenticationServiceImpl implements AuthenticationService {
         LoginUser loginUser = (LoginUser) authentication.getPrincipal();
         String userId = String.valueOf(loginUser.getUser().getId());
         String jwt = JwtUtil.createJWT(userId);
-
         Map<String,String> map = new HashMap<>();
         map.put("token",jwt);
+
         //把完整的与用户信息存入redis，userid作为key
         redisCache.setCacheObject("login:" + userId , loginUser);
 
+
+        // 获取权限信息封装到Authentication中
+        // 存入SecurityContextHolder
+        SecurityContextHolder.getContext().setAuthentication(authentication);
         return ResponseResult.successResult(map);
     }
 

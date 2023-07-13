@@ -1,5 +1,6 @@
 package com.feidian.config;
 
+import com.feidian.filter.CaptchaFilter;
 import com.feidian.filter.JwtAuthenticationTokenFilter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
@@ -31,6 +32,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     private JwtAuthenticationTokenFilter jwtAuthenticationTokenFilter;
 
     @Autowired
+    private CaptchaFilter captchaFilter;
+
+    @Autowired
     private AuthenticationEntryPoint authenticationEntryPoint;
 
     @Autowired
@@ -52,6 +56,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
         //把token校验 过滤器 添加到过滤器链中
         http.addFilterBefore(jwtAuthenticationTokenFilter, UsernamePasswordAuthenticationFilter.class);
+        //把验证码校验器添加到过滤器链中
+        http.addFilterBefore(captchaFilter,jwtAuthenticationTokenFilter.getClass());
 
         //配置异常处理器
         http.exceptionHandling()

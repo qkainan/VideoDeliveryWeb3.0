@@ -14,6 +14,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
+import java.util.stream.Collectors;
 
 @Service
 public class UserDetailsServiceImpl implements UserDetailsService {
@@ -32,11 +33,46 @@ public class UserDetailsServiceImpl implements UserDetailsService {
             throw new RuntimeException("用户名或密码错误");
         }
 
-        //TODO 查询对应的权限信息
+
         //测试写法
-        List<String> list = new ArrayList<>(Arrays.asList("test","admin"));
+        //List<String> list = new ArrayList<>(Arrays.asList("test","admin"));
+
+        //查询对应的权限信息并将其封装成一个list集合
+
+        Long userId = user.getId();
+        List<String> authenticationList = new ArrayList<>();
+        // 查询用户角色
+        LambdaQueryWrapper<SysUserRole> userRoleWrapper = new LambdaQueryWrapper<>();
+        userRoleWrapper.eq(SysUserRole::getUserId, userId);
+        List<SysUserRole> userRoles = userRoleMapper.selectList(userRoleWrapper);
+
+        List<Long> roleIds = userRoles.stream()
+                .map(SysUserRole::getRoleId)
+                .collect(Collectors.toList());
+
+        if (!roleIds.isEmpty()) {
+            // 查询角色权限
+            LambdaQueryWrapper<SysRoleMenu> roleMenuWrapper = new LambdaQueryWrapper<>();
+            roleMenuWrapper.in(SysRoleMenu::getRoleId, roleIds);
+            List<SysRoleMenu> roleMenus = roleMenuMapper.selectList(roleMenuWrapper);
+
+            List<Long> menuIds = roleMenus.stream()
+                    .map(SysRoleMenu::getMenuId)
+                    .collect(Collectors.toList());
+
+            // 查询权限菜单
+            LambdaQueryWrapper<SysMenu> menuWrapper = new LambdaQueryWrapper<>();
+            menuWrapper.in(SysMenu::getId, menuIds);
+            List<SysMenu> menus = menuMapper.selectList(menuWrapper);
+
+            // 打印用户权限菜单
+            for (SysMenu menu : menus) {
+                authenticationList.add(menu.getName());
+            }
+        }
+
         //把数据封装成UserDetails返回
-        LoginUser loginUser = new LoginUser(user, list);
+        LoginUser loginUser = new LoginUser(user, authenticationList);
         return loginUser;
     }
 }
