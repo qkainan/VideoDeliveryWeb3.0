@@ -1,10 +1,11 @@
 package com.feidian.filter;
 
-
 import com.feidian.annotation.RequireCaptcha;
+import com.feidian.responseResult.ResponseResult;
 import com.feidian.util.RedisCache;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+import org.springframework.util.StringUtils;
 import org.springframework.web.filter.OncePerRequestFilter;
 import org.springframework.web.method.HandlerMethod;
 import org.springframework.web.servlet.HandlerMapping;
@@ -27,13 +28,21 @@ public class CaptchaFilter extends OncePerRequestFilter {
             throws ServletException, IOException {
         // 检查请求是否带有@RequireCaptcha注解
         if (hasRequireCaptchaAnnotation(request)) {
-            //TODO
             // 从请求中获取用户输入的验证码
-            String userInputCaptcha = request.getParameter("captcha");
+            // 我们要求前端将验证码单独放在请求头里
+            String userInputCaptcha = request.getHeader("captcha");
+            String label = request.getHeader("label");
+
+            if(!StringUtils.hasText(label)){
+                throw new RuntimeException("用户名不能为空");
+            }
+            if(!StringUtils.hasText(userInputCaptcha)){
+                throw new RuntimeException("验证码不能为空");
+            }
 
             //TODO 获取用户名作为‘lable’
             // 从redisCache中获取生成的验证码
-            String redisCaptchaKey =  request.getParameter("") + "verifyCode:";
+            String redisCaptchaKey =  label + "verifyCode:";
             String generatedCaptcha = redisCache.getCacheObject(redisCaptchaKey);
 
             // 验证用户输入的验证码与生成的验证码是否匹配

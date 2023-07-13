@@ -6,10 +6,8 @@ import com.feidian.dto.LoginDTO;
 import com.feidian.dto.SignupDTO;
 import com.feidian.enums.HttpCodeEnum;
 import com.feidian.mapper.UserMapper;
-import com.feidian.po.SysUser;
 import com.feidian.responseResult.ResponseResult;
 import com.feidian.service.AuthenticationService;
-import com.feidian.service.UserService;
 import com.feidian.util.JwtUtil;
 import com.feidian.util.RedisCache;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -121,7 +119,6 @@ public class AuthenticationServiceImpl implements AuthenticationService {
         // 2.密码长度在8到16之间
         // 3.再次输入密码需与第一次输入的密码一致
         // 4.加密密码
-        // 5.邮箱验证
         String regexPwd = "\\w{8,16}";
 
         if (signupDTO.getUsername()==null){
@@ -140,13 +137,6 @@ public class AuthenticationServiceImpl implements AuthenticationService {
 
         if (!signupDTO.getEmail().matches(regexEmailAddress)) {
             return ResponseResult.errorResult(403,"邮箱格式不正确");
-        }
-
-        //验证邮箱验证码
-        Boolean verifyResult = (redisCache.getCacheList(signupDTO.getUsername()+ "verifyCode")).equals(signupDTO.getVerifyCode());
-
-        if (false == verifyResult) {
-            return  ResponseResult.errorResult(403,"验证码错误");
         }
 
         String encryptUserPwd = bCryptPasswordEncoder.encode(signupDTO.getPassword());
