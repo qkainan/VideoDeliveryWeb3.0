@@ -50,6 +50,11 @@ public class JwtAuthenticationTokenFilter extends OncePerRequestFilter {
             throw new RuntimeException("用户未登录");
         }
 
+        // 比对token是否匹配
+        if (!loginUser.getToken().get("token").equals(token)) {
+            throw new RuntimeException("token不匹配,登陆超时或用户非法。");
+        }
+
         //放行
         filterChain.doFilter(request, response);
     }

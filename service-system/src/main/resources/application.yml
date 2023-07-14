@@ -40,14 +40,4 @@ management:
     exposure:
       include: "*" #web端暴露所有端点
 
-#七牛云相关配置
-qiniu:
-  kodo:
-    # 配置accessKey
-    accessKey: vY0733l99q3wJrJZoaAjsLAAqEN7l_yqhM14G5VA
-    # 配置secretKey
-    secretKey: U90owYwbndFXN1wQRszdWtBcuID7mUNWnDIC3fzg
-    # 配置空间名称
-    bucket: videodeliveryweb3reposity
-    # 配置域名，域名还没备案，暂时用外链
-    domain: http://rxs08ypx9.bkt.clouddn.com/
+

@@ -8,33 +8,32 @@ import javax.annotation.Resource;
 import java.io.UnsupportedEncodingException;
 
 @RestController
-@RequestMapping("qiniukodo")
+@RequestMapping("/qiniukodo")
 public class QiniuKodoController {
 
     @Resource
     QiniuKodoUtil qiniuKodoUtil;
 
 
-    @RequestMapping("upload")
-    public void upload(String localFilePath) {
-        qiniuKodoUtil.upload(localFilePath);
-    }
+    /*@RequestMapping("/upload")
+    public String upload(String localFilePath) {
+        return qiniuKodoUtil.uploadFile(localFilePath);
+    }*/
 
-    @RequestMapping("listSpaceFiles")
-    public void listSpaceFiles() {
-        qiniuKodoUtil.listSpaceFiles();
-    }
+
     
-    @RequestMapping("getFileUrl")
-    public void getFileUrl(String fileName) {
+    @RequestMapping("/getFileUrl")
+    public String getFileUrl(String fileName) {
         try {
             qiniuKodoUtil.getFileUrl(fileName);
+            return "This is a test.";
         } catch (UnsupportedEncodingException e) {
             e.printStackTrace();
         }
+        return "This is a test.";
     }
 
-    @RequestMapping("deleteFile")
+    @RequestMapping("/deleteFile")
     public void deleteFile(String[] fileList) {
         qiniuKodoUtil.deleteFile(fileList);
     }
