@@ -1,7 +1,6 @@
 package com.feidian.filter;
 
 import com.feidian.annotation.RequireCaptcha;
-import com.feidian.responseResult.ResponseResult;
 import com.feidian.util.RedisCache;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
